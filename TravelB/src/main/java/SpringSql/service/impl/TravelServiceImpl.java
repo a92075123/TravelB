@@ -60,7 +60,7 @@ public class TravelServiceImpl  implements TravelService{
 
 	@Override
 	public Page<jpaTravel> listAll(int pageNumber) {
-		Pageable pageable =PageRequest.of(pageNumber - 1, 5); 
+		Pageable pageable =PageRequest.of(pageNumber - 1, 40);
 		return travelRepository.findAll(pageable);
 	}
 
