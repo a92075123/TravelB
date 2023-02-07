@@ -1,4 +1,4 @@
-package SpringSql.controller;
+	package SpringSql.controller;
 
 import java.util.List;
 
@@ -76,19 +76,19 @@ public class TravelController {
 		public String traveldata(Model model) {
 		
 //		List<Travel>  travel =travelService.getTravelAll();
-//		
+//
 //		model.addAttribute("listTravel",travel);
-		
+
 		return "Find";
-	
+
 		}
-		
+
 		@GetMapping("/findList")
 		public ResponseEntity<List<Travel>> travelList(Model model) {
-		
+
 		List<Travel>  travel =travelService.getTravelAll();
 
-		
+
 		
 
 		return ResponseEntity.status(HttpStatus.OK).body(travel);
