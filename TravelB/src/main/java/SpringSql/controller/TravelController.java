@@ -1,9 +1,11 @@
-	package SpringSql.controller;
+package SpringSql.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,23 +24,34 @@ import SpringSql.service.TravelService;
 
 @Controller
 public class TravelController {
-	
-	@Autowired
-	private  TravelService travelService;
-	
 
+	@Autowired
+	private TravelService travelService;
 
 	@GetMapping("/index")
-	public String home () {//@SessionAttribute("MemberSession") Member member
-	
+	public String home(Model model) {// @SessionAttribute("MemberSession") Member member
+		List<Travel> travel = travelService.getTravelAll();
+
+		model.addAttribute("listTravel", travel);
+
 //		System.err.println(member.toString());
 		return "index";
 	}
-	
 
+	@PostMapping("/index") // 查詢資料系統
+	public String dataPageIndex(Model model, @RequestParam String travelId) {
 
+		List<Travel> travel = travelService.getTravelByTown(travelId);
+		model.addAttribute("travel", travel);
 
-	
+		if (travel.isEmpty()) {// 假設沒有查詢到這筆資料
+			model.addAttribute("error", "找不到相關的資訊");
+			return "NO";
+		}
+		return "ok";
+
+	}
+
 //	@RequestMapping("/find")//網頁分頁標籤
 //	
 //	public String viewHomePAGE(Model model) {
@@ -58,14 +71,27 @@ public class TravelController {
 //				return "ok";					
 //		}
 //		
+
 		@GetMapping("/find")
 		public String traveldata(Model model) {
 		
-		List<Travel>  travel =travelService.getTravelAll();
-		
-		model.addAttribute("listTravel",travel);
+//		List<Travel>  travel =travelService.getTravelAll();
+//		
+//		model.addAttribute("listTravel",travel);
 		
 		return "Find";
+	
+		}
+		
+		@GetMapping("/findList")
+		public ResponseEntity<List<Travel>> travelList(Model model) {
+		
+		List<Travel>  travel =travelService.getTravelAll();
+
+		
+		
+
+		return ResponseEntity.status(HttpStatus.OK).body(travel);
 	
 		}
 //		model.addAttribute("currentPage",currentPage);
@@ -78,31 +104,19 @@ public class TravelController {
 //		
 //	}
 //	
-	
-	@PostMapping("/find")//查詢資料系統
-	public String dataPage(Model model,@RequestParam String travelId) {
-		
-		List<Travel> travel =travelService.getTravelByTown(travelId);		
-		model.addAttribute("travel",travel);
-		
-	
-			if(travel.isEmpty()) {//假設沒有查詢到這筆資料
-			model.addAttribute("error","找不到相關的資訊");
-			return "NO";		
-			}
-			return "ok";		
 
-					
-				
+	@PostMapping("/find") // 查詢資料系統
+	public String dataPage(Model model, @RequestParam String travelId) {
+
+		List<Travel> travel = travelService.getTravelByTown(travelId);
+		model.addAttribute("travel", travel);
+
+		if (travel.isEmpty()) {// 假設沒有查詢到這筆資料
+			model.addAttribute("error", "找不到相關的資訊");
+			return "NO";
+		}
+		return "ok";
+
 	}
 	
-	
-	}
-	
-	
-
-
-	
-
-
-	
+}
