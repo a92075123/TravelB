@@ -43,7 +43,6 @@ public class TravelController {
         return "Find";
     }
 
-  
 
 
     @GetMapping("/CIC")

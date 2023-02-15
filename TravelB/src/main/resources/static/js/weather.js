@@ -58,5 +58,5 @@ $.ajax({
     print+=`
             </div>
         </div>`;
-    $('#dt').html(print);
+    $('#dt').append(print);
 });
