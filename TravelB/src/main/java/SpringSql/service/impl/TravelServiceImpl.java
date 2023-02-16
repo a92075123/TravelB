@@ -56,10 +56,6 @@ public class TravelServiceImpl  implements TravelService{
 		
 		return travelDao.countTravel(travelQueryParams);
 	}
-
-
-
-
 //
 //	@Override
 //	public Page<jpaTravel> listAll(int pageNumber) {
@@ -67,9 +63,6 @@ public class TravelServiceImpl  implements TravelService{
 //		return travelRepository.findAll(pageable);
 //	}
 //
-
-
-
 
 
 	

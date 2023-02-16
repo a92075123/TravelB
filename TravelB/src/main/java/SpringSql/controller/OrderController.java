@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import ecpay.payment.integration.AllInOneBase;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -24,6 +24,7 @@ import SpringSql.dto.OrderQueryParams;
 import SpringSql.model.Order;
 import SpringSql.model.Page;
 import SpringSql.service.OrderSevice;
+
 
 @Controller
 public class OrderController {
@@ -64,12 +65,20 @@ public class OrderController {
 		orderSevice.deleteOrderById(orderId);
 		
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-	}
+
+	} 
+	
+
+
+	
 
 	@PostMapping("/pay")
-	public ResponseEntity<?> pay(@RequestBody Integer orderId) throws UnsupportedEncodingException {
-		String payOrderId = orderSevice.getPay(orderId);
+	public ResponseEntity<?> pay(@RequestBody OrderQueryParams queryParams) throws UnsupportedEncodingException {
+
+
+		String payOrderId = orderSevice.getPay(queryParams);
 
 		return ResponseEntity.status(HttpStatus.OK).body(payOrderId);
 	}
 }
+
