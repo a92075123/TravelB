@@ -23,6 +23,8 @@ import SpringSql.model.Order;
 import SpringSql.model.OrderItem;
 import SpringSql.model.Travel;
 import SpringSql.service.OrderSevice;
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
 
 @Component
 public class OrderServiceImpl implements OrderSevice{
