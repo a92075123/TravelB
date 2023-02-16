@@ -146,10 +146,12 @@ public class MemberController {
 	
 	//更改會員資料
 	@PutMapping("/memberCentre")
-	public ResponseEntity<Member> updataMember(@RequestBody MemberLoginRequest memberLoginRequest) {
+	public ResponseEntity<Member> updataMember(@RequestBody MemberLoginRequest memberLoginRequest,
+												HttpSession session) {
 		
 		Member member  = memberService.updataMember(memberLoginRequest);
 		
+		session.setAttribute("loginEmail", member);
 		
 		
 		return ResponseEntity.status(HttpStatus.OK).body(member);

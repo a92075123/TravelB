@@ -141,7 +141,7 @@ function upMember() {
         success: () => {
 
             swal("儲存成功!", "您已變更會員資訊!", "success");
-
+            document.location.href = "http://localhost:8080/travel/memberCentre";
             console.log("ok");
         },
         error: () => {
