@@ -25,7 +25,7 @@ public class TravelController {
 
 	@Autowired
 	private TravelService travelService;
-	
+
 	@GetMapping("/index")
 	public String home() {
 		return "index";
@@ -36,13 +36,10 @@ public class TravelController {
 	}
 
 
-
-
     @GetMapping("/find")
     public String traveldata() {
         return "Find";
     }
-
 
 
     @GetMapping("/CIC")
